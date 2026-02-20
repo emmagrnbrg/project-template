@@ -1,11 +1,15 @@
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from ..BaseService import BaseService
 from ...db.entities import RoleEntity
 from ...repositories.user.RoleRepository import RoleRepository
 from ...rest.enums.RoleEnum import RoleEnum
 
 
-class RoleService:
-    def __init__(self, repository: RoleRepository):
-        self.repository = repository
+class RoleService(BaseService):
+    def __init__(self, session: AsyncSession):
+        super().__init__(session)
+        self.repository = RoleRepository(session)
 
     async def find_by_system_code(self, system_code: RoleEnum) -> RoleEntity:
         """

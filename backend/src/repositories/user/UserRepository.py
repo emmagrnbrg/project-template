@@ -1,4 +1,5 @@
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import selectinload
 from sqlalchemy.sql.expression import select
 
 from ..BaseRepository import BaseRepository
@@ -9,7 +10,19 @@ from ...errors.user.RegistrationError import DuplicateEmailError
 
 class UserRepository(BaseRepository):
     async def find_by_email(self, email: str) -> UserEntity:
-        user = select(UserEntity).where(UserEntity.email == email)
+        """
+        Find user by email
+
+        :param email: user email
+        :return: user entity
+        """
+        user = (
+            select(UserEntity)
+            .where(UserEntity.email == email)
+            .options(
+                selectinload(UserEntity.role).selectinload(RoleEntity.rights)
+            )
+        )
         result = await self.session.execute(user)
         return result.scalar_one_or_none()
 

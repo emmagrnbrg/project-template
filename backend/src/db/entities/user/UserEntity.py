@@ -3,6 +3,7 @@ from datetime import datetime
 from sqlalchemy import Integer, String, ForeignKey, DateTime
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 
+from .RightEntity import RightEntity
 from ...Database import BaseEntity
 
 

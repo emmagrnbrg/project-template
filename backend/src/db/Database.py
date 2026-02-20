@@ -9,7 +9,6 @@ from sqlalchemy.orm import declarative_base
 
 from ..Settings import Settings
 
-load_dotenv()
 
 def get_database_url() -> str:
     load_dotenv()
