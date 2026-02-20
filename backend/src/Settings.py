@@ -7,12 +7,17 @@ class Settings(StrEnum):
     """
     Project settings
     """
-    # БД (Postgres)
+    # Database (Postgres)
     POSTGRES_USER = "POSTGRES_USER"
     POSTGRES_PASSWORD = "POSTGRES_PASSWORD"
     POSTGRES_DB = "POSTGRES_DB"
     POSTGRES_HOST = "POSTGRES_HOST"
     POSTGRES_PORT = "POSTGRES_PORT"
+
+    # Authentication
+    API_SECRET_KEY = "API_SECRET_KEY"
+    ALGORITHM = "ALGORITHM"
+    ACCESS_TOKEN_EXPIRE_MINUTES = "ACCESS_TOKEN_EXPIRE_MINUTES"
 
 
 def get_logger(name: str) -> logging.Logger:
